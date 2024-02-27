@@ -1,9 +1,10 @@
 import express from 'express'
-import { UserService } from './user.service'
+import { createUser, getUsers } from './user.service'
 import { validateUser } from './dto'
+import {query} from 'express-validator'
 
 export const Router = express.Router()
-const userService = new UserService()
 
-Router.get('/', userService.getUsers)
-Router.post('/', validateUser,userService.createUser)
+
+Router.get('/', query('created').default('desc') ,getUsers)
+Router.post('/', validateUser, createUser)
