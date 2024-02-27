@@ -1,1 +1,1 @@
-export {validateUser} from './user.dto'
+export { validateUser } from './user.dto';
