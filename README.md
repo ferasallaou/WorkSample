@@ -12,12 +12,14 @@ This project skeleton contains a basic Express setup one endpoint to create a us
 
 `npm test` executes the tests
 
-## Goal
-1. Adjust POST /users that it accepts a user and stores it in a database.
-    * The user should have a unique id, a name, a unique email address and a creation date
-2. Adjust GET /users that it returns (all) users from the database.
-   * This endpoint should be able to receive a query parameter `created` which sorts users by creation date ascending or descending.
-
-Feel free to add or change this project as you like.
+## Structure
+- This is a microservice to handle users. All the routes are defined in `src/user/user.router.ts`
+- Separation of concern is followed as well, a Router delegates to a Service, which in return calls the repository to handle DB operations.
+- DB/DTO folders are there just in case we added new schemas or validators, to avoid big files. We can also create service/router/repository folders to follow the same pattern. But at the moment, it is not needed.
 
 
+## Notes
+- To Run the app locally, please run `npm install` to install all the modules.
+- Make sure your MongoDB is running and accessible.
+- Clone .env.example to .env and make sure to fill the data.
+- Passwords are hashed on the saving level using Mongoose Hooks.
