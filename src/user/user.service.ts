@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { insertUser, listUsers } from './user.repository';
+import { insertUser, listUsers, deleteTestUsers } from './user.repository';
 
 export async function createUser(req: Request, res: Response) {
     const saveUser = await insertUser(req.body);
@@ -8,5 +8,11 @@ export async function createUser(req: Request, res: Response) {
 
 export async function getUsers(req: Request, res: Response) {
     const { created: orderByCreated } = req.query;
-    return res.status(200).send(await listUsers(orderByCreated as any));
+    const users = await listUsers(orderByCreated as any);
+    return res.status(users.success ? 200 : 500).send(users);
+}
+
+export async function deleteUsers(req: Request, res: Response) {
+    const deleteUsers = await deleteTestUsers();
+    return res.status(deleteUsers.success ? 200 : 500).send(deleteUsers);
 }
